@@ -1,0 +1,55 @@
+# Importing necessary libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Loading the wine review dataset into a Pandas dataframe
+df = pd.read_csv('https://raw.githubusercontent.com/zygmuntz/goodbooks-10k/master/books.csv')
+
+# Checking the first 5 records of the dataset to get an idea about the data
+print(df.head())
+
+# Exploring the shape of the dataset
+print("The shape of the dataset is:", df.shape)
+
+# Exploring the summary statistics of the dataset
+print("Summary Statistics of the Dataset:")
+print(df.describe())
+
+# Plotting a bar plot of the average ratings of books by publication year
+plt.figure(figsize=(10,5))
+sns.countplot(x='yearOfPublication', data=df)
+plt.xlabel('Year of Publication', fontsize=12)
+plt.ylabel('Number of Books', fontsize=12)
+plt.title('Number of Books by Publication Year', fontsize=16)
+plt.show()
+
+# Plotting a scatter plot of the ratings of books by their average ratings
+plt.figure(figsize=(10,5))
+sns.scatterplot(x='average_rating', y='ratings_count', data=df)
+plt.xlabel('Average Rating', fontsize=12)
+plt.ylabel('Number of Ratings', fontsize=12)
+plt.title('Number of Ratings by Average Rating', fontsize=16)
+plt.show()
+
+# Plotting a histogram of the distribution of the average ratings
+plt.figure(figsize=(10,5))
+sns.histplot(df['average_rating'], kde=False)
+plt.xlabel('Average Rating', fontsize=12)
+plt.ylabel('Frequency', fontsize=12)
+plt.title('Distribution of Average Ratings', fontsize=16)
+plt.show()
+
+# Plotting a box plot of the average ratings by publication year
+plt.figure(figsize=(10,5))
+sns.boxplot(x='yearOfPublication', y='average_rating', data=df)
+plt.xlabel('Year of Publication', fontsize=12)
+plt.ylabel('Average Rating', fontsize=12)
+plt.title('Average Ratings by Publication Year', fontsize=16)
+plt.show()
+
+# Plotting a heatmap of the correlation matrix of the dataset
+plt.figure(figsize=(10,5))
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
+plt.title('Correlation Matrix of the Dataset', fontsize=16)
+plt.show()
